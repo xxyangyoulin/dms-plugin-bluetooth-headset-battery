@@ -1,0 +1,11 @@
+{
+    "id": "bluetoothHeadsetBattery",
+    "name": "Bluetooth Headset Battery",
+    "description": "Show connected Bluetooth headset battery level in DankBar",
+    "version": "1.0.0",
+    "author": "xxyangyoulin",
+    "type": "widget",
+    "capabilities": ["dankbar-widget", "control-center"],
+    "component": "./BluetoothHeadsetBattery.qml",
+    "icon": "headset"
+}
