@@ -50,7 +50,7 @@ PluginComponent {
             spacing: Theme.spacingXS
 
             DankIcon {
-                name: BluetoothService.getDeviceIcon(root.primaryHeadset)
+                name: root.hasHeadset ? BluetoothService.getDeviceIcon(root.primaryHeadset) : "headset_off"
                 color: root.batteryColor(root.primaryBattery)
                 size: root.iconSize
                 anchors.verticalCenter: parent.verticalCenter
@@ -73,7 +73,7 @@ PluginComponent {
             spacing: Theme.spacingXS
 
             DankIcon {
-                name: BluetoothService.getDeviceIcon(root.primaryHeadset)
+                name: root.hasHeadset ? BluetoothService.getDeviceIcon(root.primaryHeadset) : "headset_off"
                 color: root.batteryColor(root.primaryBattery)
                 size: root.iconSize
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -90,18 +90,11 @@ PluginComponent {
 
     popoutContent: Component {
         PopoutComponent {
-            headerText: "Bluetooth Headset"
-            detailsText: root.hasHeadset ? "Connected devices with battery data" : "No connected Bluetooth headset with battery data"
             showCloseButton: false
 
             Column {
                 width: parent.width
                 spacing: Theme.spacingS
-
-                Item {
-                    width: parent.width
-                    height: Theme.spacingS
-                }
 
                 Repeater {
                     model: root.headsets
