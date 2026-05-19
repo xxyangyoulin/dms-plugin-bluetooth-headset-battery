@@ -23,6 +23,9 @@ PluginComponent {
     popoutWidth: 360
     popoutHeight: 220
 
+    Component.onCompleted: setVisibilityOverride(hasHeadset)
+    onHasHeadsetChanged: setVisibilityOverride(hasHeadset)
+
     function deviceName(device) {
         return device ? (device.name || device.deviceName || device.address || "Bluetooth headset") : "Bluetooth headset"
     }
@@ -41,18 +44,21 @@ PluginComponent {
 
     horizontalBarPill: Component {
         Row {
+            visible: root.hasHeadset
+            width: visible ? implicitWidth : 0
+            height: visible ? implicitHeight : 0
             spacing: Theme.spacingXS
 
             DankIcon {
-                name: root.hasHeadset ? BluetoothService.getDeviceIcon(root.primaryHeadset) : "headset_off"
-                color: root.hasHeadset ? root.batteryColor(root.primaryBattery) : Theme.surfaceVariantText
+                name: BluetoothService.getDeviceIcon(root.primaryHeadset)
+                color: root.batteryColor(root.primaryBattery)
                 size: root.iconSize
                 anchors.verticalCenter: parent.verticalCenter
             }
 
             StyledText {
-                text: root.hasHeadset ? `${root.primaryBattery}%` : "--"
-                color: root.hasHeadset ? Theme.surfaceText : Theme.surfaceVariantText
+                text: `${root.primaryBattery}%`
+                color: Theme.surfaceText
                 font.pixelSize: Theme.barTextSize(root.barThickness, root.barConfig?.fontScale, root.barConfig?.maximizeWidgetText)
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -61,18 +67,21 @@ PluginComponent {
 
     verticalBarPill: Component {
         Column {
+            visible: root.hasHeadset
+            width: visible ? implicitWidth : 0
+            height: visible ? implicitHeight : 0
             spacing: Theme.spacingXS
 
             DankIcon {
-                name: root.hasHeadset ? BluetoothService.getDeviceIcon(root.primaryHeadset) : "headset_off"
-                color: root.hasHeadset ? root.batteryColor(root.primaryBattery) : Theme.surfaceVariantText
+                name: BluetoothService.getDeviceIcon(root.primaryHeadset)
+                color: root.batteryColor(root.primaryBattery)
                 size: root.iconSize
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
             StyledText {
-                text: root.hasHeadset ? `${root.primaryBattery}` : "--"
-                color: root.hasHeadset ? Theme.surfaceText : Theme.surfaceVariantText
+                text: `${root.primaryBattery}`
+                color: Theme.surfaceText
                 font.pixelSize: Theme.barTextSize(root.barThickness, root.barConfig?.fontScale, root.barConfig?.maximizeWidgetText)
                 anchors.horizontalCenter: parent.horizontalCenter
             }
